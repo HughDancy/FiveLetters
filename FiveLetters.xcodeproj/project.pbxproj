@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		D84CA30E2CAB201A00793020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA30D2CAB201A00793020 /* AppDelegate.swift */; };
-		D84CA3122CAB201B00793020 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3112CAB201B00793020 /* ViewController.swift */; };
+		D84CA3122CAB201B00793020 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3112CAB201B00793020 /* MainController.swift */; };
 		D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3162CAB201B00793020 /* FiveLetters.xcdatamodeld */; };
 		D84CA31A2CAB201C00793020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D84CA3192CAB201C00793020 /* Assets.xcassets */; };
 		D84CA31D2CAB201C00793020 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D84CA31C2CAB201C00793020 /* Base */; };
+		D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3292CAB227300793020 /* BaseButton.swift */; };
+		D84CA32E2CAB231400793020 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA32D2CAB231400793020 /* MainPresenter.swift */; };
+		D84CA3312CAB232D00793020 /* MainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3302CAB232D00793020 /* MainProtocols.swift */; };
+		D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3332CAB244500793020 /* MainViewRouter.swift */; };
+		D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3372CAB248E00793020 /* GameViewController.swift */; };
+		D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D84CA30A2CAB201A00793020 /* FiveLetters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveLetters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84CA30D2CAB201A00793020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D84CA3112CAB201B00793020 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D84CA3112CAB201B00793020 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		D84CA3172CAB201B00793020 /* FiveLetters.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FiveLetters.xcdatamodel; sourceTree = "<group>"; };
 		D84CA3192CAB201C00793020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D84CA31C2CAB201C00793020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D84CA31E2CAB201C00793020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D84CA3292CAB227300793020 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		D84CA32D2CAB231400793020 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		D84CA3302CAB232D00793020 /* MainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProtocols.swift; sourceTree = "<group>"; };
+		D84CA3332CAB244500793020 /* MainViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouter.swift; sourceTree = "<group>"; };
+		D84CA3372CAB248E00793020 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +66,108 @@
 		D84CA30C2CAB201A00793020 /* FiveLetters */ = {
 			isa = PBXGroup;
 			children = (
+				D84CA3352CAB247000793020 /* GameModule */,
+				D84CA3272CAB225B00793020 /* Support */,
+				D84CA3262CAB21E400793020 /* MainModule */,
+				D84CA3322CAB243100793020 /* Router */,
+				D84CA3252CAB21B200793020 /* Resources */,
+				D84CA3242CAB21AA00793020 /* App */,
+			);
+			path = FiveLetters;
+			sourceTree = "<group>";
+		};
+		D84CA3242CAB21AA00793020 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				D84CA30D2CAB201A00793020 /* AppDelegate.swift */,
-				D84CA3112CAB201B00793020 /* ViewController.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D84CA3252CAB21B200793020 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				D84CA3192CAB201C00793020 /* Assets.xcassets */,
 				D84CA31B2CAB201C00793020 /* LaunchScreen.storyboard */,
 				D84CA31E2CAB201C00793020 /* Info.plist */,
 				D84CA3162CAB201B00793020 /* FiveLetters.xcdatamodeld */,
 			);
-			path = FiveLetters;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D84CA3262CAB21E400793020 /* MainModule */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA32F2CAB232200793020 /* Protocols */,
+				D84CA32C2CAB230800793020 /* Presenter */,
+				D84CA32B2CAB22FA00793020 /* View */,
+			);
+			path = MainModule;
+			sourceTree = "<group>";
+		};
+		D84CA3272CAB225B00793020 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3282CAB226100793020 /* InterfaceElements */,
+				D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		D84CA3282CAB226100793020 /* InterfaceElements */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3292CAB227300793020 /* BaseButton.swift */,
+			);
+			path = InterfaceElements;
+			sourceTree = "<group>";
+		};
+		D84CA32B2CAB22FA00793020 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3112CAB201B00793020 /* MainController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D84CA32C2CAB230800793020 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA32D2CAB231400793020 /* MainPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D84CA32F2CAB232200793020 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3302CAB232D00793020 /* MainProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D84CA3322CAB243100793020 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3332CAB244500793020 /* MainViewRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		D84CA3352CAB247000793020 /* GameModule */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3362CAB247500793020 /* View */,
+			);
+			path = GameModule;
+			sourceTree = "<group>";
+		};
+		D84CA3362CAB247500793020 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3372CAB248E00793020 /* GameViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +240,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84CA3122CAB201B00793020 /* ViewController.swift in Sources */,
+				D84CA32E2CAB231400793020 /* MainPresenter.swift in Sources */,
+				D84CA3122CAB201B00793020 /* MainController.swift in Sources */,
+				D84CA3312CAB232D00793020 /* MainProtocols.swift in Sources */,
+				D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */,
 				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
+				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
+				D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */,
+				D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */,
 				D84CA30E2CAB201A00793020 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +394,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FiveLetters/Info.plist;
+				INFOPLIST_FILE = FiveLetters/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -313,7 +425,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9KN879RV4D;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FiveLetters/Info.plist;
+				INFOPLIST_FILE = FiveLetters/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
