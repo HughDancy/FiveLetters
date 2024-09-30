@@ -18,6 +18,10 @@
 		D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3332CAB244500793020 /* MainViewRouter.swift */; };
 		D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3372CAB248E00793020 /* GameViewController.swift */; };
 		D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */; };
+		D84CA33D2CAB265F00793020 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA33C2CAB265F00793020 /* BaseCell.swift */; };
+		D84CA33F2CAB268800793020 /* GameBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA33E2CAB268800793020 /* GameBoardCell.swift */; };
+		D84CA3412CAB26A400793020 /* KeysType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3402CAB26A400793020 /* KeysType.swift */; };
+		D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3422CAB26DB00793020 /* KeyboardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		D84CA3332CAB244500793020 /* MainViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRouter.swift; sourceTree = "<group>"; };
 		D84CA3372CAB248E00793020 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyBuilder.swift; sourceTree = "<group>"; };
+		D84CA33C2CAB265F00793020 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		D84CA33E2CAB268800793020 /* GameBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardCell.swift; sourceTree = "<group>"; };
+		D84CA3402CAB26A400793020 /* KeysType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysType.swift; sourceTree = "<group>"; };
+		D84CA3422CAB26DB00793020 /* KeyboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,7 @@
 			children = (
 				D84CA3282CAB226100793020 /* InterfaceElements */,
 				D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */,
+				D84CA3402CAB26A400793020 /* KeysType.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -117,6 +126,7 @@
 		D84CA3282CAB226100793020 /* InterfaceElements */ = {
 			isa = PBXGroup;
 			children = (
+				D84CA33B2CAB265300793020 /* CustomCells */,
 				D84CA3292CAB227300793020 /* BaseButton.swift */,
 			);
 			path = InterfaceElements;
@@ -168,6 +178,16 @@
 				D84CA3372CAB248E00793020 /* GameViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D84CA33B2CAB265300793020 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA33C2CAB265F00793020 /* BaseCell.swift */,
+				D84CA33E2CAB268800793020 /* GameBoardCell.swift */,
+				D84CA3422CAB26DB00793020 /* KeyboardCell.swift */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,12 +262,16 @@
 			files = (
 				D84CA32E2CAB231400793020 /* MainPresenter.swift in Sources */,
 				D84CA3122CAB201B00793020 /* MainController.swift in Sources */,
+				D84CA33F2CAB268800793020 /* GameBoardCell.swift in Sources */,
+				D84CA3412CAB26A400793020 /* KeysType.swift in Sources */,
 				D84CA3312CAB232D00793020 /* MainProtocols.swift in Sources */,
 				D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */,
+				D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */,
 				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
 				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
 				D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */,
 				D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */,
+				D84CA33D2CAB265F00793020 /* BaseCell.swift in Sources */,
 				D84CA30E2CAB201A00793020 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
