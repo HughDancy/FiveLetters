@@ -23,6 +23,8 @@
 		D84CA3412CAB26A400793020 /* KeysType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3402CAB26A400793020 /* KeysType.swift */; };
 		D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3422CAB26DB00793020 /* KeyboardCell.swift */; };
 		D84CA3452CAB273E00793020 /* GameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3442CAB273E00793020 /* GameCollectionView.swift */; };
+		D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3472CAB27B300793020 /* GameBoardController.swift */; };
+		D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3492CAB27D500793020 /* KeyboardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		D84CA3402CAB26A400793020 /* KeysType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysType.swift; sourceTree = "<group>"; };
 		D84CA3422CAB26DB00793020 /* KeyboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
 		D84CA3442CAB273E00793020 /* GameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionView.swift; sourceTree = "<group>"; };
+		D84CA3472CAB27B300793020 /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
+		D84CA3492CAB27D500793020 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +80,11 @@
 		D84CA30C2CAB201A00793020 /* FiveLetters */ = {
 			isa = PBXGroup;
 			children = (
-				D84CA3352CAB247000793020 /* GameModule */,
+				D84CA3242CAB21AA00793020 /* App */,
 				D84CA3272CAB225B00793020 /* Support */,
 				D84CA3262CAB21E400793020 /* MainModule */,
-				D84CA3322CAB243100793020 /* Router */,
+				D84CA3352CAB247000793020 /* GameModule */,
 				D84CA3252CAB21B200793020 /* Resources */,
-				D84CA3242CAB21AA00793020 /* App */,
 			);
 			path = FiveLetters;
 			sourceTree = "<group>";
@@ -110,6 +113,7 @@
 			children = (
 				D84CA32F2CAB232200793020 /* Protocols */,
 				D84CA32C2CAB230800793020 /* Presenter */,
+				D84CA3322CAB243100793020 /* Router */,
 				D84CA32B2CAB22FA00793020 /* View */,
 			);
 			path = MainModule;
@@ -178,6 +182,7 @@
 		D84CA3362CAB247500793020 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D84CA3462CAB279800793020 /* Subviews */,
 				D84CA3372CAB248E00793020 /* GameViewController.swift */,
 			);
 			path = View;
@@ -191,6 +196,15 @@
 				D84CA3422CAB26DB00793020 /* KeyboardCell.swift */,
 			);
 			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		D84CA3462CAB279800793020 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3472CAB27B300793020 /* GameBoardController.swift */,
+				D84CA3492CAB27D500793020 /* KeyboardController.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +285,9 @@
 				D84CA3312CAB232D00793020 /* MainProtocols.swift in Sources */,
 				D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */,
 				D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */,
+				D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */,
 				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
+				D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */,
 				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
 				D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */,
 				D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */,
