@@ -22,6 +22,7 @@
 		D84CA33F2CAB268800793020 /* GameBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA33E2CAB268800793020 /* GameBoardCell.swift */; };
 		D84CA3412CAB26A400793020 /* KeysType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3402CAB26A400793020 /* KeysType.swift */; };
 		D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3422CAB26DB00793020 /* KeyboardCell.swift */; };
+		D84CA3452CAB273E00793020 /* GameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3442CAB273E00793020 /* GameCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		D84CA33E2CAB268800793020 /* GameBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardCell.swift; sourceTree = "<group>"; };
 		D84CA3402CAB26A400793020 /* KeysType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysType.swift; sourceTree = "<group>"; };
 		D84CA3422CAB26DB00793020 /* KeyboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCell.swift; sourceTree = "<group>"; };
+		D84CA3442CAB273E00793020 /* GameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				D84CA33B2CAB265300793020 /* CustomCells */,
 				D84CA3292CAB227300793020 /* BaseButton.swift */,
+				D84CA3442CAB273E00793020 /* GameCollectionView.swift */,
 			);
 			path = InterfaceElements;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84CA3452CAB273E00793020 /* GameCollectionView.swift in Sources */,
 				D84CA32E2CAB231400793020 /* MainPresenter.swift in Sources */,
 				D84CA3122CAB201B00793020 /* MainController.swift in Sources */,
 				D84CA33F2CAB268800793020 /* GameBoardCell.swift in Sources */,
