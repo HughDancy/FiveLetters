@@ -7,15 +7,21 @@
 
 import UIKit
 
-class MainController: UIViewController {
+class MainController: UIViewController, MainViewProtocol {
     // MARK: - Properties
     private var isGameExisting = false
+    var presenter: MainPresenterProtocol?
 
     // MARK: - Outlets
-    private lazy var startGameButton = BaseButton(title: "Начать новую игру")
+    private lazy var startGameButton: BaseButton = {
+        let button = BaseButton(title: "Начать новую игру")
+        button.addTarget(self, action: #selector(goToGame), for: .touchDown)
+        return button
+    }()
+
     private lazy var continueGameButton: BaseButton = {
         let button = BaseButton(title: "Продолжить игру")
-        button.isHidden = isGameExisting
+        button.isHidden = !isGameExisting
         button.addTarget(self, action: #selector(goToGame), for: .touchDown)
         return button
     }()
@@ -23,7 +29,9 @@ class MainController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .label
+        setupHierarchy()
+        setupLayout()
     }
 
     // MARK: - Setup Hierarchy and Layout
@@ -48,7 +56,11 @@ class MainController: UIViewController {
     }
 
     @objc func goToGame() {
-        
+        self.presenter?.goToNewGame(from: self)
+    }
+
+    @objc func continueGame() {
+
     }
 
 }
