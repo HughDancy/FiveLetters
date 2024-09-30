@@ -26,6 +26,8 @@ class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        view.backgroundColor = .clear
+        title = "5 букв"
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: GameBoardSizes.leading.value),
