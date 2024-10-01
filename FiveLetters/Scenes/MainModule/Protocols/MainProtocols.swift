@@ -9,15 +9,16 @@ import UIKit
 
 protocol MainViewProtocol: AnyObject {
     var presenter: MainPresenterProtocol? { get set }
-
 }
 
 protocol MainPresenterProtocol: AnyObject {
     var view: MainViewProtocol? { get set }
     var router: MainRouterProtocol? { get set }
-    func goToNewGame(from view: MainViewProtocol)
+
+    func goToGame(isGameExisting: Bool)
+    func checkNewGame() -> Bool
 }
 
 protocol MainRouterProtocol: AnyObject {
-    func goNewGame(from view: UIViewController)
+    func goToGame(from view: UIViewController, isGameExisting: Bool)
 }

@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MainController: UIViewController, MainViewProtocol {
+final class MainController: UIViewController, MainViewProtocol {
     // MARK: - Properties
-    private var isGameExisting = false
+    private var isGameExisting: Bool?
     var presenter: MainPresenterProtocol?
 
     // MARK: - Outlets
@@ -20,16 +20,25 @@ class MainController: UIViewController, MainViewProtocol {
     }()
 
     private lazy var continueGameButton: BaseButton = {
-        let button = BaseButton(title: "Продолжить игру")
-        button.isHidden = !isGameExisting
-        button.addTarget(self, action: #selector(goToGame), for: .touchDown)
+        let button = BaseButton(title: "Продолжить текущую игру")
+        if let boolean = isGameExisting {
+            button.isHidden = !boolean
+        }
+        button.addTarget(self, action: #selector(continueGame), for: .touchDown)
         return button
     }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+
+    // MARK: - Setup View
+    private func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIsGameExist), name: Notification.Name("isGameExist"), object: nil)
         view.backgroundColor = .label
+        self.isGameExisting  = presenter?.checkNewGame()
         setupHierarchy()
         setupLayout()
     }
@@ -51,18 +60,25 @@ class MainController: UIViewController, MainViewProtocol {
             continueGameButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: MainScreenSizes.leading.rawValue),
             continueGameButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: MainScreenSizes.trailing.rawValue),
             continueGameButton.heightAnchor.constraint(equalToConstant: MainScreenSizes.height.rawValue),
-
         ])
     }
 
+    // MARK: - Button's action
     @objc func goToGame() {
-        self.presenter?.goToNewGame(from: self)
+        self.presenter?.goToGame(isGameExisting: false)
     }
 
     @objc func continueGame() {
-
+        self.presenter?.goToGame(isGameExisting: true)
     }
 
+    // MARK: - Notification Center method
+    @objc func updateIsGameExist(notification: Notification) {
+        guard let value = notification.userInfo else { return }
+        guard let bolean = value["gameExist"] as? Bool else { return }
+        self.isGameExisting = bolean
+        self.continueGameButton.isHidden = !bolean
+    }
 }
 
 fileprivate enum MainScreenSizes: CGFloat {
