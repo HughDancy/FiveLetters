@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class WordManager {
+final class WordConverterManager {
     func convertToWord(_ chars: [Character?]) -> String {
         var string = ""
         for char in chars {

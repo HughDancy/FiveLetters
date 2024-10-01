@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D84CA30E2CAB201A00793020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA30D2CAB201A00793020 /* AppDelegate.swift */; };
 		D84CA3122CAB201B00793020 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3112CAB201B00793020 /* MainController.swift */; };
-		D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3162CAB201B00793020 /* FiveLetters.xcdatamodeld */; };
 		D84CA31A2CAB201C00793020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D84CA3192CAB201C00793020 /* Assets.xcassets */; };
 		D84CA31D2CAB201C00793020 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D84CA31C2CAB201C00793020 /* Base */; };
 		D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3292CAB227300793020 /* BaseButton.swift */; };
@@ -30,7 +29,7 @@
 		D84CA3532CABDC7F00793020 /* GameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3522CABDC7F00793020 /* GameRouter.swift */; };
 		D84CA3552CABE78600793020 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = D84CA3542CABE78600793020 /* words.json */; };
 		D84CA3572CABE7A200793020 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3562CABE7A200793020 /* Words.swift */; };
-		D84CA3592CAC213700793020 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3582CAC213700793020 /* WordManager.swift */; };
+		D84CA3592CAC213700793020 /* WordConverterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3582CAC213700793020 /* WordConverterManager.swift */; };
 		D84CA35B2CAC233900793020 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA35A2CAC233900793020 /* StorageManager.swift */; };
 		D84CA35E2CAC281F00793020 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA35D2CAC281F00793020 /* GameModel.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +38,6 @@
 		D84CA30A2CAB201A00793020 /* FiveLetters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveLetters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84CA30D2CAB201A00793020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D84CA3112CAB201B00793020 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
-		D84CA3172CAB201B00793020 /* FiveLetters.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FiveLetters.xcdatamodel; sourceTree = "<group>"; };
 		D84CA3192CAB201C00793020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D84CA31C2CAB201C00793020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D84CA31E2CAB201C00793020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,7 +59,7 @@
 		D84CA3522CABDC7F00793020 /* GameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRouter.swift; sourceTree = "<group>"; };
 		D84CA3542CABE78600793020 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = words.json; path = ../../../../../../Downloads/words.json; sourceTree = "<group>"; };
 		D84CA3562CABE7A200793020 /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
-		D84CA3582CAC213700793020 /* WordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
+		D84CA3582CAC213700793020 /* WordConverterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordConverterManager.swift; sourceTree = "<group>"; };
 		D84CA35A2CAC233900793020 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D84CA35D2CAC281F00793020 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,8 +96,7 @@
 			children = (
 				D84CA3242CAB21AA00793020 /* App */,
 				D84CA3272CAB225B00793020 /* Support */,
-				D84CA3262CAB21E400793020 /* MainModule */,
-				D84CA3352CAB247000793020 /* GameModule */,
+				D84CA35F2CAC770500793020 /* Scenes */,
 				D84CA3252CAB21B200793020 /* Resources */,
 			);
 			path = FiveLetters;
@@ -120,7 +117,6 @@
 				D84CA3192CAB201C00793020 /* Assets.xcassets */,
 				D84CA31B2CAB201C00793020 /* LaunchScreen.storyboard */,
 				D84CA31E2CAB201C00793020 /* Info.plist */,
-				D84CA3162CAB201B00793020 /* FiveLetters.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -143,7 +139,7 @@
 				D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */,
 				D84CA3402CAB26A400793020 /* KeysType.swift */,
 				D84CA3562CABE7A200793020 /* Words.swift */,
-				D84CA3582CAC213700793020 /* WordManager.swift */,
+				D84CA3582CAC213700793020 /* WordConverterManager.swift */,
 				D84CA35A2CAC233900793020 /* StorageManager.swift */,
 			);
 			path = Support;
@@ -263,6 +259,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D84CA35F2CAC770500793020 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3262CAB21E400793020 /* MainModule */,
+				D84CA3352CAB247000793020 /* GameModule */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -346,8 +351,7 @@
 				D84CA35E2CAC281F00793020 /* GameModel.swift in Sources */,
 				D84CA3572CABE7A200793020 /* Words.swift in Sources */,
 				D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */,
-				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
-				D84CA3592CAC213700793020 /* WordManager.swift in Sources */,
+				D84CA3592CAC213700793020 /* WordConverterManager.swift in Sources */,
 				D84CA35B2CAC233900793020 /* StorageManager.swift in Sources */,
 				D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */,
 				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
@@ -577,19 +581,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D84CA3162CAB201B00793020 /* FiveLetters.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D84CA3172CAB201B00793020 /* FiveLetters.xcdatamodel */,
-			);
-			currentVersion = D84CA3172CAB201B00793020 /* FiveLetters.xcdatamodel */;
-			path = FiveLetters.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D84CA3022CAB201A00793020 /* Project object */;
 }

@@ -17,14 +17,4 @@ final  class MainViewRouter: MainRouterProtocol {
             view.navigationController?.pushViewController(gameModule, animated: true)
         }
     }
-    
-//    func goNewGame(from view: UIViewController) {
-//        let gameModule = AssemblyBuilder.createGameModule(isGameExist: false)
-//        view.navigationController?.pushViewController(gameModule, animated: true)
-//    }
-//
-//    func continueGame(from view: UIViewController) {
-//        let gameModule = AssemblyBuilder.createGameModule(isGameExist: true)
-//        view.navigationController?.pushViewController(gameModule, animated: true)
-//    }
 }

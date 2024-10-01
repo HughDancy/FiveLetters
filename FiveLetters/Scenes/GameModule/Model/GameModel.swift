@@ -10,7 +10,7 @@ import Foundation
 final class GameModel: GameModelProtocol {
     // MARK: - Properties
     private let wordsStorage = WordsCollection()
-    private let wordManager = WordManager()
+    private let wordManager = WordConverterManager()
     private let storageManager = StorageManager.shared
     private let keys = WordsKeys.allCases
 

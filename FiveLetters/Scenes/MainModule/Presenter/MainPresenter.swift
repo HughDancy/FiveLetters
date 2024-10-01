@@ -16,7 +16,6 @@ final class MainPresenter: MainPresenterProtocol {
         router?.goToGame(from: view, isGameExisting: isGameExisting)
     }
 
-
     func checkNewGame() -> Bool {
         let storageManager = StorageManager()
         let word: String? = storageManager.getWord(key: WordsKeys.firstWord)

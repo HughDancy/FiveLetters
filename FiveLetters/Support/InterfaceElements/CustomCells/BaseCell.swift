@@ -43,13 +43,13 @@ class BaseCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Prepare for reuse
     override func prepareForReuse() {
         self.label.text = nil
         self.container.backgroundColor = .label
         self.container.layer.borderColor = UIColor.white.cgColor
     }
 
+    // MARK: - Common Init
     private func commonInit() {
         setupHierarchy()
         setupLayout()

@@ -7,12 +7,26 @@
 
 import UIKit
 
-class KeyboardCell: BaseCell {
+final class KeyboardCell: BaseCell {
+    // MARK: - Properties
     static let reuseIdentifier = "KeyboardCell"
     var type: KeysType? = .keyboardType(.standart)
     var activeType: ActiveType? = .unactive
     var matchType: MatchType? = .standart
 
+   // MARK: - Prepare for reuse method
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.image.image = nil
+        self.type = nil
+        self.activeType = nil
+        self.matchType = nil
+        self.label.textColor = .white
+        self.isUserInteractionEnabled = true
+    }
+
+    // MARK: - Base setup cell
+    /// Base setup cell for letters, clear or done type
     func setupKeyboardCell(with string: Character) {
         switch self.type {
         case .keyboardType(.standart):
@@ -30,6 +44,7 @@ class KeyboardCell: BaseCell {
         }
     }
 
+    // MARK: - Setup cell for letter match
     func setupMatchType(with match: MatchType) {
         switch match {
         case .fullMatch:
@@ -46,10 +61,12 @@ class KeyboardCell: BaseCell {
         }
     }
 
+    // MARK: - Support method for done and remove cell
     private func addImageToKey(type: SupportKeys, active: ActiveType) {
         self.label.text = nil
         self.image.isHidden = false
         self.container.layer.borderColor = UIColor.clear.cgColor
+
         switch type {
         case .done:
             self.image.image = UIImage(systemName: "checkmark")
@@ -69,16 +86,6 @@ class KeyboardCell: BaseCell {
         default:
             break
         }
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.image.image = nil
-        self.type = nil
-        self.activeType = nil
-        self.matchType = nil
-        self.label.textColor = .white
-        self.isUserInteractionEnabled = true
     }
 }
 

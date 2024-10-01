@@ -23,7 +23,6 @@ class MainController: UIViewController, MainViewProtocol {
         let button = BaseButton(title: "Продолжить игру")
         if let boolean = isGameExisting {
             button.isHidden = !boolean
-            print(boolean)
         }
         button.addTarget(self, action: #selector(continueGame), for: .touchDown)
         return button
@@ -40,9 +39,9 @@ class MainController: UIViewController, MainViewProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(updateIsGameExist), name: Notification.Name("isGameExist"), object: nil)
         view.backgroundColor = .label
         self.isGameExisting  = presenter?.checkNewGame()
+//        self.continueGameButton.isHidden = self.isGameExisting ?? true
         setupHierarchy()
         setupLayout()
-
     }
 
     // MARK: - Setup Hierarchy and Layout
