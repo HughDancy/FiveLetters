@@ -21,11 +21,12 @@ final class AssemblyBuilder {
 
     static func createGameModule() -> UIViewController {
         let view = GameViewController()
-        let presenter: GamePresenterProtocol = GamePresenter()
+        let presenter: GamePresenterProtocol & GamePresenterForRouterProtocol = GamePresenter()
         let router: GameRouterProtocol = GameRouter()
         view.presenter = presenter
         presenter.view = view
         presenter.router = router
+        router.presenter = presenter
         return view
     }
 }

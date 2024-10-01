@@ -31,7 +31,14 @@ protocol GamePresenterProtocol: AnyObject {
     func tapDoneKey()
 }
 
+protocol GamePresenterForRouterProtocol: AnyObject {
+    func restart()
+    func goBack()
+}
+
 protocol GameRouterProtocol: AnyObject {
+    var presenter: GamePresenterForRouterProtocol? { get set }
     func dismiss(from view: GameViewProtocol)
+    func showGameOverAlert(from view: GameViewProtocol, answer: String)
 
 }

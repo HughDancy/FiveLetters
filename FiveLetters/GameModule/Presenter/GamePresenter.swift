@@ -48,7 +48,6 @@ extension GamePresenter {
             for j in 0..<guesses[i].count {
                 if guesses[i][j] == nil {
                     guesses[i][j] = char
-                    lettersForKeyboard[char] = .standart
                     stop = true
                     break
                 }
@@ -84,7 +83,32 @@ extension GamePresenter {
         self.view?.reloadGameboard()
         self.section += 1
         isWordComplete[section] = false
+        if isWordComplete.count == 7 {
+            guard let view = view else { return }
+            self.router?.showGameOverAlert(from: view, answer: self.answer)
+        }
     }
+
+    private func reloadPropsForNewGame() {
+        self.answer = wordsStorage.words?.words.randomElement() ?? "дождь"
+        self.clearGuesses()
+        self.section = 0
+        self.isWordComplete = [0 : false]
+        self.lettersForKeyboard = [Character : MatchType?]()
+        self.view?.setKeyboardKeys(with: self.lettersForKeyboard)
+        self.view?.reloadKeyboard()
+        self.view?.reloadGameboard()
+        self.view?.getChars(self.guesses)
+        self.view?.getAnswer(self.answer)
+    }
+
+    private func clearGuesses() {
+        self.guesses = Array(
+            repeating: Array(repeating: nil, count: 5),
+            count: 6
+        )
+    }
+
 }
    // MARK: - Protocol Method's for Gameboard
 extension GamePresenter {
@@ -117,6 +141,18 @@ extension GamePresenter {
             return .wrongPlace
         }
         return .standart
+    }
+}
+
+ // MARK: - Extenstion for Router
+extension GamePresenter: GamePresenterForRouterProtocol {
+    func restart() {
+        self.reloadPropsForNewGame()
+    }
+    
+    func goBack() {
+        guard let view = view else { return }
+        self.router?.dismiss(from: view)
     }
 }
 
