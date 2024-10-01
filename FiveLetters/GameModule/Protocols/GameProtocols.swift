@@ -10,6 +10,8 @@ import UIKit
 protocol GameModelProtocol: AnyObject {
     func getAnswer() -> String
     func getCharacters() -> [[Character?]]
+    func getSection() -> Int
+    func getWordsComplete() -> [Int : Bool]
     func saveWord(_ chars: [Character?], index: Int)
     func saveAnswer(_ word: String)
     func removeWords()
@@ -28,7 +30,9 @@ protocol GamePresenterProtocol: AnyObject {
     var view: GameViewProtocol? { get set }
     var model: GameModelProtocol? { get set }
     var router: GameRouterProtocol? { get set }
+    var isGameExist: Bool? { get set }
 
+    func setupGame()
     func fetchChars()
     func getAnswer() -> String
     func getBack()

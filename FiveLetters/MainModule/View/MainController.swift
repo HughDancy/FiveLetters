@@ -23,6 +23,7 @@ class MainController: UIViewController, MainViewProtocol {
         let button = BaseButton(title: "Продолжить игру")
         if let boolean = isGameExisting {
             button.isHidden = !boolean
+            print(boolean)
         }
         button.addTarget(self, action: #selector(goToGame), for: .touchDown)
         return button
@@ -59,11 +60,11 @@ class MainController: UIViewController, MainViewProtocol {
     }
 
     @objc func goToGame() {
-        self.presenter?.goToNewGame(from: self)
+        self.presenter?.goToGame(isGameExisting: true)
     }
 
     @objc func continueGame() {
-
+        self.presenter?.goToGame(isGameExisting: false)
     }
 
 }

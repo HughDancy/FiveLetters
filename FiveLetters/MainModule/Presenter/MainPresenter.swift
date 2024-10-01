@@ -11,10 +11,11 @@ final class MainPresenter: MainPresenterProtocol {
     weak var view: MainViewProtocol?
     var router: MainRouterProtocol?
 
-    func goToNewGame(from view: any MainViewProtocol) {
+    func goToGame(isGameExisting: Bool) {
         guard let view = view as? UIViewController else { return }
-        router?.goNewGame(from: view)
+        router?.goToGame(from: view, isGameExisting: isGameExisting)
     }
+
 
     func checkNewGame() -> Bool {
         let storageManager = StorageManager()

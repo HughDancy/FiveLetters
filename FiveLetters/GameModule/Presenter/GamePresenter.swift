@@ -12,6 +12,11 @@ final class GamePresenter: GamePresenterProtocol {
     weak var view: GameViewProtocol?
     var router: GameRouterProtocol?
     var model: GameModelProtocol?
+    var isGameExist: Bool? {
+        didSet {
+            self.setupGame()
+        }
+    }
 
     // MARK: - Private properties
     private var guesses: [[Character?]] = Array(
@@ -22,20 +27,34 @@ final class GamePresenter: GamePresenterProtocol {
     private var section = 0
     private var isWordComplete = [0 : false]
     private var lettersForKeyboard = [Character : MatchType?]()
-//    private let wordsStorage = WordsCollection()
-//    private let wordManager = WordManager()
-//    private let storageManager = StorageManager()
-//    private let keys = WordsKeys.allCases
 
+    // MARK: - Setup Game
+    func setupGame() {
+        guard let bool = isGameExist else { return }
+        if bool {
+            self.answer = model?.getAnswer() ?? "дождь"
+            let chars: [[Character?]] = Array(
+                repeating: Array(repeating: nil, count: 5),
+                count: 6
+            )
+            self.guesses = model?.getCharacters() ?? chars
+            let sec = model?.getSection()
+            self.section = sec ?? 0
+            self.isWordComplete = model?.getWordsComplete() ?? [0 : false]
+            print(sec)
+
+        } else {
+            self.answer = model?.getAnswer() ?? "Дождь"
+        }
+    }
 
     // MARK: - Protocol method's
     func fetchChars() {
-        
+        view?.getChars(self.guesses)
     }
     
     func getAnswer() -> String {
         self.answer = model?.getAnswer() ?? "дождь"
-//        wordsStorage.getRandomWord()
         return self.answer
     }
     
@@ -86,6 +105,8 @@ extension GamePresenter {
 
     func tapDoneKey() {
         isWordComplete.updateValue(true, forKey: section)
+        model?.saveWord(guesses[section], index: section)
+        model?.saveAnswer(self.answer)
 //        let string = wordManager.convertToWord(guesses[section])
 //        storageManager.saveWord(key: keys[section], word: string)
         self.view?.reloadGameboard()
@@ -99,6 +120,7 @@ extension GamePresenter {
 
     private func reloadPropsForNewGame() {
 //        self.answer = wordsStorage.collection?.words.randomElement() ?? "дождь"
+        self.model?.removeWords()
         self.answer = model?.getAnswer() ?? "дождь"
         self.clearGuesses()
         self.section = 0

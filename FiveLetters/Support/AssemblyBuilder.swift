@@ -20,11 +20,16 @@ final class AssemblyBuilder {
         return navViewController
     }
 
-    static func createGameModule() -> UIViewController {
+    static func createGameModule(isGameExist: Bool) -> UIViewController {
         let view = GameViewController()
         let presenter: GamePresenterProtocol & GamePresenterForRouterProtocol = GamePresenter()
         let gameModel: GameModelProtocol = GameModel()
         let router: GameRouterProtocol = GameRouter()
+        if isGameExist {
+            presenter.isGameExist = true
+        } else {
+            presenter.isGameExist = false
+        }
         view.presenter = presenter
         presenter.view = view
         presenter.router = router

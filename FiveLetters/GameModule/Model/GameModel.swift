@@ -11,12 +11,17 @@ final class GameModel: GameModelProtocol {
     // MARK: - Properties
     private let wordsStorage = WordsCollection()
     private let wordManager = WordManager()
-    private let storageManager = StorageManager()
+    private let storageManager = StorageManager.shared
     private let keys = WordsKeys.allCases
 
     // MARK: - Protocol Method's
     func getAnswer() -> String {
-        return self.wordsStorage.getRandomWord()
+        let safeAnser = storageManager.getAnswer()
+        if safeAnser == nil {
+            return self.wordsStorage.getRandomWord()
+        } else {
+            return safeAnser ?? "Дождь"
+        }
     }
     
     func getCharacters() -> [[Character?]] {
@@ -32,16 +37,19 @@ final class GameModel: GameModelProtocol {
                 for _ in 0..<5 {
                     char.append(nil)
                 }
+
             }
             chars.append(char)
         }
+        print(chars)
         return chars
     }
-    
+
     func saveWord(_ chars: [Character?], index: Int) {
         let string = wordManager.convertToWord(chars)
-        if index > 6 {
+        if index < 6 {
             self.storageManager.saveWord(key: keys[index], word: string)
+            print(string)
         }
     }
 
@@ -52,6 +60,40 @@ final class GameModel: GameModelProtocol {
     func removeWords() {
         self.storageManager.removeAllWords()
     }
-    
+
+    func getSection() -> Int {
+        var words = [String?]()
+        var count = 0
+        for (index, _) in keys.enumerated() {
+            let word = storageManager.getWord(key: keys[index])
+            words.append(word)
+        }
+
+        for i in 0..<5 {
+            if words[i]?.compactMap({$0}).count != nil {
+                count += 1
+            }
+        }
+        return count
+    }
+
+    func getWordsComplete() -> [Int : Bool] {
+        var words = [String?]()
+        var isWordComplete = [Int : Bool]()
+        for (index, _) in keys.enumerated() {
+            let word = storageManager.getWord(key: keys[index])
+            words.append(word)
+        }
+
+        for i in 0..<5 {
+            if words[i]?.compactMap({$0}).count != nil {
+                isWordComplete[i] = true
+            } else {
+                isWordComplete[i] = false
+            }
+        }
+        return isWordComplete
+    }
+
     
 }

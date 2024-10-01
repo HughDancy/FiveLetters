@@ -23,7 +23,6 @@ class GameViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.fetchChars()
         self.answer = self.presenter?.getAnswer() ?? "дождь"
     }
     
@@ -31,9 +30,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = .label
+        presenter?.setupGame()
         addChildren()
-        let storage = StorageManager()
-        storage.removeAllWords()
+        presenter?.fetchChars()
+//        let storage = StorageManager.shared
+//        storage.removeAllWords()
     }
 
     deinit {

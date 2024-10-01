@@ -8,6 +8,7 @@
 import Foundation
 
 final class StorageManager {
+    static let shared = StorageManager()
     let storage = UserDefaults.standard
 
     func saveAnswer(_ string: String) {
