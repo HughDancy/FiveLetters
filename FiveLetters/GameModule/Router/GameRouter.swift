@@ -17,7 +17,10 @@ final class GameRouter: GameRouterProtocol {
     func showGameOverAlert(from view: any GameViewProtocol, answer: String) {
         guard let currentView = view as? UIViewController else { return }
         let alertController = UIAlertController(title: "Game Over",
-                                                message: "К сожалению попытки закончились 🙁 Загаданное слово было - \(answer.uppercased()), но вы можете сыграть еще раз!",
+                                                message: """
+                                                К сожалению, попытки закончились 🙁
+                                                Загаданное слово было - \(answer.uppercased()), но вы можете сыграть еще раз!
+                                                """,
                                                 preferredStyle: .alert)
         let restartAction = UIAlertAction(title: "Играть еще раз",
                                          style: .default) { _ in

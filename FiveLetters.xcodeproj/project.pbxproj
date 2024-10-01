@@ -30,6 +30,8 @@
 		D84CA3532CABDC7F00793020 /* GameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3522CABDC7F00793020 /* GameRouter.swift */; };
 		D84CA3552CABE78600793020 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = D84CA3542CABE78600793020 /* words.json */; };
 		D84CA3572CABE7A200793020 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3562CABE7A200793020 /* Words.swift */; };
+		D84CA3592CAC213700793020 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3582CAC213700793020 /* WordManager.swift */; };
+		D84CA35B2CAC233900793020 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA35A2CAC233900793020 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		D84CA3522CABDC7F00793020 /* GameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRouter.swift; sourceTree = "<group>"; };
 		D84CA3542CABE78600793020 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = words.json; path = ../../../../../../Downloads/words.json; sourceTree = "<group>"; };
 		D84CA3562CABE7A200793020 /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
+		D84CA3582CAC213700793020 /* WordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
+		D84CA35A2CAC233900793020 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 				D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */,
 				D84CA3402CAB26A400793020 /* KeysType.swift */,
 				D84CA3562CABE7A200793020 /* Words.swift */,
+				D84CA3582CAC213700793020 /* WordManager.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				D84CA33B2CAB265300793020 /* CustomCells */,
 				D84CA3292CAB227300793020 /* BaseButton.swift */,
 				D84CA3442CAB273E00793020 /* GameCollectionView.swift */,
+				D84CA35A2CAC233900793020 /* StorageManager.swift */,
 			);
 			path = InterfaceElements;
 			sourceTree = "<group>";
@@ -329,6 +335,8 @@
 				D84CA3572CABE7A200793020 /* Words.swift in Sources */,
 				D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */,
 				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
+				D84CA3592CAC213700793020 /* WordManager.swift in Sources */,
+				D84CA35B2CAC233900793020 /* StorageManager.swift in Sources */,
 				D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */,
 				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
 				D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */,

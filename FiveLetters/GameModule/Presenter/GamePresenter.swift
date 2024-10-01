@@ -22,6 +22,8 @@ final class GamePresenter: GamePresenterProtocol {
     private var isWordComplete = [0 : false]
     private var lettersForKeyboard = [Character : MatchType?]()
     private var wordsStorage = WordsCollection()
+    private var wordManager = WordManager()
+
 
     // MARK: - Protocol method's
     func fetchChars() {
@@ -29,7 +31,7 @@ final class GamePresenter: GamePresenterProtocol {
     }
     
     func getAnswer() -> String {
-        self.answer = wordsStorage.words?.words.randomElement() ?? ""
+        self.answer = wordsStorage.getRandomWord()
         return self.answer
     }
     
@@ -90,7 +92,7 @@ extension GamePresenter {
     }
 
     private func reloadPropsForNewGame() {
-        self.answer = wordsStorage.words?.words.randomElement() ?? "дождь"
+        self.answer = wordsStorage.collection?.words.randomElement() ?? "дождь"
         self.clearGuesses()
         self.section = 0
         self.isWordComplete = [0 : false]
@@ -108,8 +110,8 @@ extension GamePresenter {
             count: 6
         )
     }
-
 }
+
    // MARK: - Protocol Method's for Gameboard
 extension GamePresenter {
     func setKeys(at indexPath: IndexPath) -> MatchType? {

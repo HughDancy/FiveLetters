@@ -14,7 +14,7 @@ struct Words: Decodable {
 final class WordsCollection {
     private let decoder = JSONDecoder()
     private let fileName = "words"
-    var words: Words?
+    var collection: Words?
 
     init() {
         self.loadWords()
@@ -26,9 +26,13 @@ final class WordsCollection {
         guard let fileUrl = url else { return }
         do {
             let data = try Data(contentsOf: fileUrl)
-            self.words = try decoder.decode(Words.self, from: data)
+            self.collection = try decoder.decode(Words.self, from: data)
         } catch (let error) {
             print("Ошибка при декодировании файла по адресу: \(fileUrl), ошибка: \(error)")
         }
+    }
+
+    func getRandomWord() -> String {
+        return self.collection?.words.randomElement() ?? "дождь"
     }
 }
