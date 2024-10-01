@@ -28,6 +28,8 @@
 		D84CA34D2CAB281C00793020 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA34C2CAB281C00793020 /* GameProtocols.swift */; };
 		D84CA34F2CAB2D6000793020 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA34E2CAB2D6000793020 /* GamePresenter.swift */; };
 		D84CA3532CABDC7F00793020 /* GameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3522CABDC7F00793020 /* GameRouter.swift */; };
+		D84CA3552CABE78600793020 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = D84CA3542CABE78600793020 /* words.json */; };
+		D84CA3572CABE7A200793020 /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3562CABE7A200793020 /* Words.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		D84CA34C2CAB281C00793020 /* GameProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
 		D84CA34E2CAB2D6000793020 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		D84CA3522CABDC7F00793020 /* GameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRouter.swift; sourceTree = "<group>"; };
+		D84CA3542CABE78600793020 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = words.json; path = ../../../../../../Downloads/words.json; sourceTree = "<group>"; };
+		D84CA3562CABE7A200793020 /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 		D84CA3252CAB21B200793020 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D84CA3542CABE78600793020 /* words.json */,
 				D84CA3192CAB201C00793020 /* Assets.xcassets */,
 				D84CA31B2CAB201C00793020 /* LaunchScreen.storyboard */,
 				D84CA31E2CAB201C00793020 /* Info.plist */,
@@ -131,6 +136,7 @@
 				D84CA3282CAB226100793020 /* InterfaceElements */,
 				D84CA3392CAB24EE00793020 /* AssemblyBuilder.swift */,
 				D84CA3402CAB26A400793020 /* KeysType.swift */,
+				D84CA3562CABE7A200793020 /* Words.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84CA3552CABE78600793020 /* words.json in Resources */,
 				D84CA31A2CAB201C00793020 /* Assets.xcassets in Resources */,
 				D84CA31D2CAB201C00793020 /* Base in Resources */,
 			);
@@ -319,6 +326,7 @@
 				D84CA34D2CAB281C00793020 /* GameProtocols.swift in Sources */,
 				D84CA33A2CAB24EE00793020 /* AssemblyBuilder.swift in Sources */,
 				D84CA3432CAB26DB00793020 /* KeyboardCell.swift in Sources */,
+				D84CA3572CABE7A200793020 /* Words.swift in Sources */,
 				D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */,
 				D84CA3182CAB201B00793020 /* FiveLetters.xcdatamodeld in Sources */,
 				D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */,

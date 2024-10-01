@@ -8,9 +8,11 @@
 import UIKit
 
 final class GamePresenter: GamePresenterProtocol {
+    // MARK: - Protocol properties
     weak var view: GameViewProtocol?
     var router: GameRouterProtocol?
 
+    // MARK: - Private properties
     private var guesses: [[Character?]] = Array(
         repeating: Array(repeating: nil, count: 5),
         count: 6
@@ -19,12 +21,15 @@ final class GamePresenter: GamePresenterProtocol {
     private var section = 0
     private var isWordComplete = [0 : false]
     private var lettersForKeyboard = [Character : MatchType?]()
+    private var wordsStorage = WordsCollection()
 
+    // MARK: - Protocol method's
     func fetchChars() {
         
     }
     
     func getAnswer() -> String {
+        self.answer = wordsStorage.words?.words.randomElement() ?? ""
         return self.answer
     }
     
@@ -32,11 +37,11 @@ final class GamePresenter: GamePresenterProtocol {
         guard let view = view  else { return }
         self.router?.dismiss(from: view)
     }
- 
 }
 
+    // MARK: - Protocol methods for Keyboard
 extension GamePresenter {
-    func tapKeys(with char: Character) {
+     func tapKeys(with char: Character) {
         var stop = false
 
         for i in 0..<guesses.count {
@@ -81,7 +86,7 @@ extension GamePresenter {
         isWordComplete[section] = false
     }
 }
-
+   // MARK: - Protocol Method's for Gameboard
 extension GamePresenter {
     func setKeys(at indexPath: IndexPath) -> MatchType? {
         let rowIndex = indexPath.section

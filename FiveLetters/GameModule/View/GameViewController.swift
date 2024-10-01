@@ -14,11 +14,7 @@ class GameViewController: UIViewController {
         repeating: Array(repeating: nil, count: 5),
         count: 6
     )
-    
     private var answer = ""
-    private var section = 0
-    private var isWordComplete = [0 : false]
-    private var lettersForKeyboard = [Character : MatchType?]()
 
     // MARK: - Outlets
     let gamefieldController = GameboardController()
@@ -112,49 +108,14 @@ extension GameViewController: GameViewProtocol {
 extension GameViewController: KeyboardDelegate {
     func keyboard(_ vc: UIViewController, didTapKey letter: Character) {
         self.presenter?.tapKeys(with: letter)
-//        var stop = false
-//
-//        for i in 0..<guesses.count {
-//            for j in 0..<guesses[i].count {
-//                if guesses[i][j] == nil {
-//                    guesses[i][j] = letter
-//                    lettersForKeyboard[letter] = .standart
-//                    stop = true
-//                    break
-//                }
-//            }
-//            if stop {
-//                break
-//            }
-//        }
-//        gamefieldController.reloadData()
     }
 
     func didTapDoneKey()  {
         self.presenter?.tapDoneKey()
-//        isWordComplete.updateValue(true, forKey: section)
-//        self.gamefieldController.reloadData()
-//        self.section += 1
-//        isWordComplete[section] = false
-
     }
 
         func didTapClearKey(_ vc: UIViewController) {
             self.presenter?.deleteChar()
-//            var stop = false
-//            for (section, arr) in guesses.enumerated().reversed() {
-//                for (index, item) in arr.enumerated().reversed() {
-//                    if item != nil {
-//                        guesses[section][index] = nil
-//                        stop = true
-//                        break
-//                    }
-//                }
-//                if stop {
-//                    break
-//                }
-//            }
-//            gamefieldController.reloadData()
         }
     }
 
@@ -166,33 +127,5 @@ extension GameViewController: GameBoardDelegate {
 
     func setLetter(at indexPath: IndexPath) -> MatchType? {
         self.presenter?.setKeys(at: indexPath)
-//        let rowIndex = indexPath.section
-//        if self.section == rowIndex {
-//        }
-//
-//        let count = guesses[rowIndex].compactMap({ $0 }).count
-//        if count < 5 {
-//            return .standart
-//        } else if isWordComplete[rowIndex] == true {
-//            let indexedAnswer = Array(answer)
-//
-//            guard let letter = guesses[indexPath.section][indexPath.row],
-//                  indexedAnswer.contains(letter) else {
-//                let character = guesses[indexPath.section][indexPath.row]
-//                self.lettersForKeyboard[character ?? "f"] = .wrongLetter
-//                keyboardController.setupMatch(self.lettersForKeyboard)
-//                return .wrongLetter
-//            }
-//
-//            if indexedAnswer[indexPath.row] == letter {
-//                self.lettersForKeyboard[letter] = .fullMatch
-//                keyboardController.setupMatch(self.lettersForKeyboard)
-//                return .fullMatch
-//            }
-//            self.lettersForKeyboard[letter] = .wrongPlace
-//            keyboardController.setupMatch(self.lettersForKeyboard)
-//            return .wrongPlace
-//        }
-//        return .standart
     }
 }
