@@ -25,7 +25,7 @@ class MainController: UIViewController, MainViewProtocol {
             button.isHidden = !boolean
             print(boolean)
         }
-        button.addTarget(self, action: #selector(goToGame), for: .touchDown)
+        button.addTarget(self, action: #selector(continueGame), for: .touchDown)
         return button
     }()
 
@@ -60,11 +60,11 @@ class MainController: UIViewController, MainViewProtocol {
     }
 
     @objc func goToGame() {
-        self.presenter?.goToGame(isGameExisting: true)
+        self.presenter?.goToGame(isGameExisting: false)
     }
 
     @objc func continueGame() {
-        self.presenter?.goToGame(isGameExisting: false)
+        self.presenter?.goToGame(isGameExisting: true)
     }
 
 }

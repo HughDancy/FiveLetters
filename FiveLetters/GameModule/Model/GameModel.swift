@@ -41,7 +41,6 @@ final class GameModel: GameModelProtocol {
             }
             chars.append(char)
         }
-        print(chars)
         return chars
     }
 
