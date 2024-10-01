@@ -26,6 +26,8 @@
 		D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3472CAB27B300793020 /* GameBoardController.swift */; };
 		D84CA34A2CAB27D500793020 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3492CAB27D500793020 /* KeyboardController.swift */; };
 		D84CA34D2CAB281C00793020 /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA34C2CAB281C00793020 /* GameProtocols.swift */; };
+		D84CA34F2CAB2D6000793020 /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA34E2CAB2D6000793020 /* GamePresenter.swift */; };
+		D84CA3532CABDC7F00793020 /* GameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84CA3522CABDC7F00793020 /* GameRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		D84CA3472CAB27B300793020 /* GameBoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardController.swift; sourceTree = "<group>"; };
 		D84CA3492CAB27D500793020 /* KeyboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		D84CA34C2CAB281C00793020 /* GameProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocols.swift; sourceTree = "<group>"; };
+		D84CA34E2CAB2D6000793020 /* GamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
+		D84CA3522CABDC7F00793020 /* GameRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 		D84CA3352CAB247000793020 /* GameModule */ = {
 			isa = PBXGroup;
 			children = (
+				D84CA3512CABDC7400793020 /* Router */,
+				D84CA3502CABD37400793020 /* Presenter */,
 				D84CA34B2CAB280C00793020 /* Protocols */,
 				D84CA3362CAB247500793020 /* View */,
 			);
@@ -216,6 +222,22 @@
 				D84CA34C2CAB281C00793020 /* GameProtocols.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D84CA3502CABD37400793020 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA34E2CAB2D6000793020 /* GamePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D84CA3512CABDC7400793020 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D84CA3522CABDC7F00793020 /* GameRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,7 +324,9 @@
 				D84CA3482CAB27B300793020 /* GameBoardController.swift in Sources */,
 				D84CA3382CAB248E00793020 /* GameViewController.swift in Sources */,
 				D84CA32A2CAB227300793020 /* BaseButton.swift in Sources */,
+				D84CA34F2CAB2D6000793020 /* GamePresenter.swift in Sources */,
 				D84CA3342CAB244500793020 /* MainViewRouter.swift in Sources */,
+				D84CA3532CABDC7F00793020 /* GameRouter.swift in Sources */,
 				D84CA33D2CAB265F00793020 /* BaseCell.swift in Sources */,
 				D84CA30E2CAB201A00793020 /* AppDelegate.swift in Sources */,
 			);

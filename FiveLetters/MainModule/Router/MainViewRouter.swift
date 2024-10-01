@@ -9,9 +9,7 @@ import UIKit
 
 final  class MainViewRouter: MainRouterProtocol {
     func goNewGame(from view: UIViewController) {
-        let newViewController = GameViewController()
-        view.navigationController?.pushViewController(newViewController, animated: true)
+        let gameModule = AssemblyBuilder.createGameModule()
+        view.navigationController?.pushViewController(gameModule, animated: true)
     }
-
-
 }

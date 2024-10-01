@@ -18,4 +18,14 @@ final class AssemblyBuilder {
         let navViewController = UINavigationController(rootViewController: view)
         return navViewController
     }
+
+    static func createGameModule() -> UIViewController {
+        let view = GameViewController()
+        let presenter: GamePresenterProtocol = GamePresenter()
+        let router: GameRouterProtocol = GameRouter()
+        view.presenter = presenter
+        presenter.view = view
+        presenter.router = router
+        return view
+    }
 }

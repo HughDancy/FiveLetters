@@ -21,8 +21,8 @@ class GameViewController: UIViewController {
     private var lettersForKeyboard = [Character : MatchType?]()
 
     // MARK: - Outlets
-    let gameVc = BoardViewController()
-    let keyboardVc = KeyboardController()
+    let gamefieldController = GameboardController()
+    let keyboardController = KeyboardController()
 
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +38,10 @@ class GameViewController: UIViewController {
         addChildren()
     }
 
+    deinit {
+        print("GameViewController is - ☠️")
+    }
+
     // MARK: - Setup NavigationBar
     private func setupNavigationBar() {
         title = "5 букв"
@@ -47,42 +51,59 @@ class GameViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
     }
 
-    // MARK: - Setup View
+    // MARK: - Add children
     private func addChildren() {
-        addChild(keyboardVc)
-        keyboardVc.delegate = self
-        keyboardVc.didMove(toParent: self)
-        keyboardVc.view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(keyboardVc.view)
+        addChild(keyboardController)
+        keyboardController.delegate = self
+        keyboardController.didMove(toParent: self)
+        keyboardController.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(keyboardController.view)
 
-        addChild(gameVc)
-        gameVc.gameBoardDelegate = self
-        gameVc.didMove(toParent: self)
-        gameVc.view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(gameVc.view)
+        addChild(gamefieldController)
+        gamefieldController.gameBoardDelegate = self
+        gamefieldController.didMove(toParent: self)
+        gamefieldController.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(gamefieldController.view)
         setupLayout()
     }
 
+    // MARK: - Setup Layout
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            gameVc.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            gameVc.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            gameVc.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            gameVc.view.bottomAnchor.constraint(equalTo: keyboardVc.view.topAnchor),
-            gameVc.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
+            gamefieldController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gamefieldController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            gamefieldController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            gamefieldController.view.bottomAnchor.constraint(equalTo: keyboardController.view.topAnchor),
+            gamefieldController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6),
 
-            keyboardVc.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            keyboardVc.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            keyboardVc.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            keyboardController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keyboardController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keyboardController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 
     @objc func goBack() {
-        self.presenter?.getBack(view: self)
+        self.presenter?.getBack()
     }
 }
 
 extension GameViewController: GameViewProtocol {
+    func setKeyboardKeys(with keys: [Character : MatchType?]) {
+        self.keyboardController.setupMatch(keys)
+    }
+    
+    func getAnswer(_ answer: String) {
+        self.answer = answer
+    }
+    
+    func reloadKeyboard() {
+        self.keyboardController.reloadData()
+    }
+    
+    func reloadGameboard() {
+        self.gamefieldController.reloadData()
+    }
+    
     func getChars(_ chars: [[Character?]]) {
         self.guesses = chars
     }
@@ -90,47 +111,50 @@ extension GameViewController: GameViewProtocol {
 
 extension GameViewController: KeyboardDelegate {
     func keyboard(_ vc: UIViewController, didTapKey letter: Character) {
-        var stop = false
-
-        for i in 0..<guesses.count {
-            for j in 0..<guesses[i].count {
-                if guesses[i][j] == nil {
-                    guesses[i][j] = letter
-                    lettersForKeyboard[letter] = .standart
-                    stop = true
-                    break
-                }
-            }
-            if stop {
-                break
-            }
-        }
-        gameVc.reloadData()
+        self.presenter?.tapKeys(with: letter)
+//        var stop = false
+//
+//        for i in 0..<guesses.count {
+//            for j in 0..<guesses[i].count {
+//                if guesses[i][j] == nil {
+//                    guesses[i][j] = letter
+//                    lettersForKeyboard[letter] = .standart
+//                    stop = true
+//                    break
+//                }
+//            }
+//            if stop {
+//                break
+//            }
+//        }
+//        gamefieldController.reloadData()
     }
 
     func didTapDoneKey()  {
-        isWordComplete.updateValue(true, forKey: section)
-        self.gameVc.reloadData()
-        self.section += 1
-        isWordComplete[section] = false
+        self.presenter?.tapDoneKey()
+//        isWordComplete.updateValue(true, forKey: section)
+//        self.gamefieldController.reloadData()
+//        self.section += 1
+//        isWordComplete[section] = false
 
     }
 
         func didTapClearKey(_ vc: UIViewController) {
-            var stop = false
-            for (section, arr) in guesses.enumerated().reversed() {
-                for (index, item) in arr.enumerated().reversed() {
-                    if item != nil {
-                        guesses[section][index] = nil
-                        stop = true
-                        break
-                    }
-                }
-                if stop {
-                    break
-                }
-            }
-            gameVc.reloadData()
+            self.presenter?.deleteChar()
+//            var stop = false
+//            for (section, arr) in guesses.enumerated().reversed() {
+//                for (index, item) in arr.enumerated().reversed() {
+//                    if item != nil {
+//                        guesses[section][index] = nil
+//                        stop = true
+//                        break
+//                    }
+//                }
+//                if stop {
+//                    break
+//                }
+//            }
+//            gamefieldController.reloadData()
         }
     }
 
@@ -141,33 +165,34 @@ extension GameViewController: GameBoardDelegate {
     }
 
     func setLetter(at indexPath: IndexPath) -> MatchType? {
-        let rowIndex = indexPath.section
-        if self.section == rowIndex {
-        }
-
-        let count = guesses[rowIndex].compactMap({ $0 }).count
-        if count < 5 {
-            return .standart
-        } else if isWordComplete[rowIndex] == true {
-            let indexedAnswer = Array(answer)
-
-            guard let letter = guesses[indexPath.section][indexPath.row],
-                  indexedAnswer.contains(letter) else {
-                let character = guesses[indexPath.section][indexPath.row]
-                self.lettersForKeyboard[character ?? "f"] = .wrongLetter
-                keyboardVc.setupMatch(self.lettersForKeyboard)
-                return .wrongLetter
-            }
-
-            if indexedAnswer[indexPath.row] == letter {
-                self.lettersForKeyboard[letter] = .fullMatch
-                keyboardVc.setupMatch(self.lettersForKeyboard)
-                return .fullMatch
-            }
-            self.lettersForKeyboard[letter] = .wrongPlace
-            keyboardVc.setupMatch(self.lettersForKeyboard)
-            return .wrongPlace
-        }
-        return .standart
+        self.presenter?.setKeys(at: indexPath)
+//        let rowIndex = indexPath.section
+//        if self.section == rowIndex {
+//        }
+//
+//        let count = guesses[rowIndex].compactMap({ $0 }).count
+//        if count < 5 {
+//            return .standart
+//        } else if isWordComplete[rowIndex] == true {
+//            let indexedAnswer = Array(answer)
+//
+//            guard let letter = guesses[indexPath.section][indexPath.row],
+//                  indexedAnswer.contains(letter) else {
+//                let character = guesses[indexPath.section][indexPath.row]
+//                self.lettersForKeyboard[character ?? "f"] = .wrongLetter
+//                keyboardController.setupMatch(self.lettersForKeyboard)
+//                return .wrongLetter
+//            }
+//
+//            if indexedAnswer[indexPath.row] == letter {
+//                self.lettersForKeyboard[letter] = .fullMatch
+//                keyboardController.setupMatch(self.lettersForKeyboard)
+//                return .fullMatch
+//            }
+//            self.lettersForKeyboard[letter] = .wrongPlace
+//            keyboardController.setupMatch(self.lettersForKeyboard)
+//            return .wrongPlace
+//        }
+//        return .standart
     }
 }

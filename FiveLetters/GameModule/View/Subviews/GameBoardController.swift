@@ -12,7 +12,7 @@ protocol GameBoardDelegate: AnyObject {
     func setLetter(at indexPath: IndexPath) -> MatchType?
 }
 
-class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class GameboardController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     weak var gameBoardDelegate: GameBoardDelegate?
 
     private lazy var collectionView: GameCollectionView = {
@@ -27,7 +27,6 @@ class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         collectionView.delegate = self
         collectionView.dataSource = self
         view.backgroundColor = .clear
-        title = "5 букв"
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: GameBoardSizes.leading.value),
@@ -43,7 +42,7 @@ class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     }
 }
 
-extension BoardViewController {
+extension GameboardController {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return gameBoardDelegate?.currentGuesses.count ?? 0
     }

@@ -10,6 +10,10 @@ import UIKit
 protocol GameViewProtocol: AnyObject {
     var presenter: GamePresenterProtocol? { get set }
     func getChars(_ chars: [[Character?]])
+    func getAnswer(_ answer: String)
+    func setKeyboardKeys(with keys: [Character : MatchType?])
+    func reloadKeyboard()
+    func reloadGameboard()
 
 }
 
@@ -20,11 +24,14 @@ protocol GamePresenterProtocol: AnyObject {
 
     func fetchChars()
     func getAnswer() -> String
-    func getBack(view: GameViewProtocol)
-    func setLetter(at indexPath: IndexPath) -> MatchType?
+    func getBack()
+    func setKeys(at indexPath: IndexPath) -> MatchType? 
+    func tapKeys(with char: Character)
+    func deleteChar()
+    func tapDoneKey()
 }
 
 protocol GameRouterProtocol: AnyObject {
-    func dismiss(from view: UIViewController)
+    func dismiss(from view: GameViewProtocol)
 
 }
