@@ -125,9 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				D84CA32F2CAB232200793020 /* Protocols */,
+				D84CA32B2CAB22FA00793020 /* View */,
 				D84CA32C2CAB230800793020 /* Presenter */,
 				D84CA3322CAB243100793020 /* Router */,
-				D84CA32B2CAB22FA00793020 /* View */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";

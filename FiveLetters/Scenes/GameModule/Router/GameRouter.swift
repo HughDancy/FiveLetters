@@ -31,6 +31,7 @@ final class GameRouter: GameRouterProtocol {
         let cancelAction = UIAlertAction(title: "Выйти из игры",
                                          style: .cancel) { _ in
             self.presenter?.goBack()
+            self.presenter?.restart()
         }
         alertController.addAction(restartAction)
         alertController.addAction(cancelAction)
@@ -39,7 +40,7 @@ final class GameRouter: GameRouterProtocol {
 
     func showCongratsAlert(from view: any GameViewProtocol) {
         guard let currentView = view as? UIViewController else { return }
-        let alertController = UIAlertController(title: "🥳 ПОБЕДА 🥳",
+        let alertController = UIAlertController(title: "🥳 ПОБЕДА! 🥳",
                                                 message: "",
                                                 preferredStyle: .alert)
         alertController.view.alpha = 0.5
@@ -48,6 +49,5 @@ final class GameRouter: GameRouterProtocol {
             self.presenter?.restart()
             alertController.dismiss(animated: true)
         })
-
     }
 }

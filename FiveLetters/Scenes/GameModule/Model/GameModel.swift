@@ -24,20 +24,15 @@ final class GameModel: GameModelProtocol {
         }
     }
     
-    func getCharacters() -> [[Character?]] {
+    func getSavedCharacters() -> [[Character?]] {
         var chars = [[Character?]]()
-        var words = [String?]()
-        for (index, _) in keys.enumerated() {
-            let word = storageManager.getWord(key: keys[index])
-            words.append(word)
-        }
+        let words = self.getAllWords()
         for (index, _) in words.enumerated() {
             var char: [Character?] = wordManager.convertToChars(words[index] ?? "")
             if char.isEmpty {
                 for _ in 0..<5 {
                     char.append(nil)
                 }
-
             }
             chars.append(char)
         }
@@ -48,7 +43,6 @@ final class GameModel: GameModelProtocol {
         let string = wordManager.convertToWord(chars)
         if index < 6 {
             self.storageManager.saveWord(key: keys[index], word: string)
-            print(string)
         }
     }
 
@@ -61,13 +55,8 @@ final class GameModel: GameModelProtocol {
     }
 
     func getSection() -> Int {
-        var words = [String?]()
         var count = 0
-        for (index, _) in keys.enumerated() {
-            let word = storageManager.getWord(key: keys[index])
-            words.append(word)
-        }
-
+        let words = self.getAllWords()
         for i in 0..<5 {
             if words[i]?.compactMap({$0}).count != nil {
                 count += 1
@@ -77,13 +66,8 @@ final class GameModel: GameModelProtocol {
     }
 
     func getWordsComplete() -> [Int : Bool] {
-        var words = [String?]()
+        let words = self.getAllWords()
         var isWordComplete = [Int : Bool]()
-        for (index, _) in keys.enumerated() {
-            let word = storageManager.getWord(key: keys[index])
-            words.append(word)
-        }
-
         for i in 0..<5 {
             if words[i]?.compactMap({$0}).count != nil {
                 isWordComplete[i] = true
@@ -100,6 +84,15 @@ final class GameModel: GameModelProtocol {
         let answer = storageManager.getAnswer()
         return str == answer ? true : false
     }
+}
 
-    
+extension GameModel {
+    private func getAllWords() -> [String?] {
+        var words = [String?]()
+        for (index, _) in keys.enumerated() {
+            let word = storageManager.getWord(key: keys[index])
+            words.append(word)
+        }
+        return words
+    }
 }

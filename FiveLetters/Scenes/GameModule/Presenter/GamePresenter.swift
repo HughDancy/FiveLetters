@@ -34,7 +34,7 @@ final class GamePresenter: GamePresenterProtocol {
                 repeating: Array(repeating: nil, count: 5),
                 count: 6
             )
-            self.guesses = model?.getCharacters() ?? chars
+            self.guesses = model?.getSavedCharacters() ?? chars
             let sec = model?.getSection()
             self.section = sec ?? 0
             self.isWordComplete = model?.getWordsComplete() ?? [0 : false]
@@ -51,11 +51,9 @@ final class GamePresenter: GamePresenterProtocol {
     func getBack() {
         guard let view = view  else { return }
         if section > 0 {
-            let value = ["gameExist" : true]
-            NotificationCenter.default.post(name: NSNotification.Name("isGameExist"), object: nil, userInfo: value)
+            self.sendNotification(with: true)
         } else {
-            let value = ["gameExist" : false]
-            NotificationCenter.default.post(name: NSNotification.Name("isGameExist"), object: nil, userInfo: value)
+            self.sendNotification(with: false)
         }
         self.router?.dismiss(from: view)
     }
@@ -105,7 +103,6 @@ extension GamePresenter {
         isWordComplete.updateValue(true, forKey: section)
         model?.saveWord(guesses[section], index: section)
         model?.saveAnswer(self.answer)
-        print(self.answer)
         self.view?.reloadGameboard()
         self.checkWord()
         self.section += 1
@@ -164,6 +161,7 @@ extension GamePresenter: GamePresenterForRouterProtocol {
   /// Reload properites for new game, clean guess word and check answer
 extension GamePresenter {
     private func reloadPropsForNewGame() {
+        self.sendNotification(with: false)
         self.model?.removeWords()
         self.answer = model?.getAnswer() ?? "дождь"
         self.clearGuesses()
@@ -195,6 +193,11 @@ extension GamePresenter {
             guard let view = view else { return }
             self.router?.showGameOverAlert(from: view, answer: self.answer)
         }
+    }
+
+    private func sendNotification(with bool: Bool) {
+        let value = ["gameExist" : bool]
+        NotificationCenter.default.post(name: NSNotification.Name("isGameExist"), object: nil, userInfo: value)
     }
 }
 

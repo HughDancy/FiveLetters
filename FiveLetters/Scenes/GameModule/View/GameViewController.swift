@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
     // MARK: - Properties
     var presenter: GamePresenterProtocol?
     private var guesses: [[Character?]] = Array(

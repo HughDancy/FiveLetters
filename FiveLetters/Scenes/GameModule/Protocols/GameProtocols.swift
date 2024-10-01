@@ -9,7 +9,7 @@ import UIKit
 
 protocol GameModelProtocol: AnyObject {
     func getAnswer() -> String
-    func getCharacters() -> [[Character?]]
+    func getSavedCharacters() -> [[Character?]]
     func getSection() -> Int
     func getWordsComplete() -> [Int : Bool]
     func saveWord(_ chars: [Character?], index: Int)

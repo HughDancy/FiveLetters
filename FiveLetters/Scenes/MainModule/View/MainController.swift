@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainController: UIViewController, MainViewProtocol {
+final class MainController: UIViewController, MainViewProtocol {
     // MARK: - Properties
     private var isGameExisting: Bool?
     var presenter: MainPresenterProtocol?
@@ -20,7 +20,7 @@ class MainController: UIViewController, MainViewProtocol {
     }()
 
     private lazy var continueGameButton: BaseButton = {
-        let button = BaseButton(title: "Продолжить игру")
+        let button = BaseButton(title: "Продолжить текущую игру")
         if let boolean = isGameExisting {
             button.isHidden = !boolean
         }
@@ -39,7 +39,6 @@ class MainController: UIViewController, MainViewProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(updateIsGameExist), name: Notification.Name("isGameExist"), object: nil)
         view.backgroundColor = .label
         self.isGameExisting  = presenter?.checkNewGame()
-//        self.continueGameButton.isHidden = self.isGameExisting ?? true
         setupHierarchy()
         setupLayout()
     }
