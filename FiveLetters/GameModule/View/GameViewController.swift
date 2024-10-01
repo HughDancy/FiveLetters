@@ -22,17 +22,20 @@ class GameViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+
+    deinit {
+        print("GameViewController is - ☠️")
+    }
+
+    // MARK: - Setup View
+    private func setupView() {
         setupNavigationBar()
         view.backgroundColor = .label
         presenter?.setupGame()
         addChildren()
         presenter?.fetchChars()
-//        let storage = StorageManager.shared
-//        storage.removeAllWords()
-    }
-
-    deinit {
-        print("GameViewController is - ☠️")
     }
 
     // MARK: - Setup NavigationBar

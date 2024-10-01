@@ -32,10 +32,17 @@ class MainController: UIViewController, MainViewProtocol {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+
+    // MARK: - Setup View
+    private func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIsGameExist), name: Notification.Name("isGameExist"), object: nil)
         view.backgroundColor = .label
         self.isGameExisting  = presenter?.checkNewGame()
         setupHierarchy()
         setupLayout()
+
     }
 
     // MARK: - Setup Hierarchy and Layout
@@ -55,10 +62,10 @@ class MainController: UIViewController, MainViewProtocol {
             continueGameButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: MainScreenSizes.leading.rawValue),
             continueGameButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: MainScreenSizes.trailing.rawValue),
             continueGameButton.heightAnchor.constraint(equalToConstant: MainScreenSizes.height.rawValue),
-
         ])
     }
 
+    // MARK: - Button's action
     @objc func goToGame() {
         self.presenter?.goToGame(isGameExisting: false)
     }
@@ -67,6 +74,13 @@ class MainController: UIViewController, MainViewProtocol {
         self.presenter?.goToGame(isGameExisting: true)
     }
 
+    // MARK: - Notification Center method
+    @objc func updateIsGameExist(notification: Notification) {
+        guard let value = notification.userInfo else { return }
+        guard let bolean = value["gameExist"] as? Bool else { return }
+        self.isGameExisting = bolean
+        self.continueGameButton.isHidden = !bolean
+    }
 }
 
 fileprivate enum MainScreenSizes: CGFloat {

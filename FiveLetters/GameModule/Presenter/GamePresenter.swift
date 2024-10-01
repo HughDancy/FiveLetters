@@ -27,6 +27,7 @@ final class GamePresenter: GamePresenterProtocol {
     // MARK: - Setup Game
     func setupGame() {
         guard let bool = isGameExist else { return }
+
         if bool {
             self.answer = model?.getAnswer() ?? "дождь"
             let chars: [[Character?]] = Array(
@@ -37,8 +38,6 @@ final class GamePresenter: GamePresenterProtocol {
             let sec = model?.getSection()
             self.section = sec ?? 0
             self.isWordComplete = model?.getWordsComplete() ?? [0 : false]
-            print(sec)
-
         } else {
             self.answer = model?.getAnswer() ?? "Дождь"
         }
@@ -51,11 +50,19 @@ final class GamePresenter: GamePresenterProtocol {
     
     func getBack() {
         guard let view = view  else { return }
+        if section > 0 {
+            let value = ["gameExist" : true]
+            NotificationCenter.default.post(name: NSNotification.Name("isGameExist"), object: nil, userInfo: value)
+        } else {
+            let value = ["gameExist" : false]
+            NotificationCenter.default.post(name: NSNotification.Name("isGameExist"), object: nil, userInfo: value)
+        }
         self.router?.dismiss(from: view)
     }
 }
 
     // MARK: - Protocol methods for Keyboard
+   /// Tap on letter, tap on done and cleap button
 extension GamePresenter {
      func tapKeys(with char: Character) {
         var stop = false
@@ -100,40 +107,15 @@ extension GamePresenter {
         model?.saveAnswer(self.answer)
         print(self.answer)
         self.view?.reloadGameboard()
-        if model?.checkGuessWord(guesses[section]) ?? false {
-            guard let view = view else { return }
-            router?.showCongratsAlert(from: view)
-        }
+        self.checkWord()
         self.section += 1
         isWordComplete[section] = false
-        if isWordComplete.count == 7 {
-            guard let view = view else { return }
-            self.router?.showGameOverAlert(from: view, answer: self.answer)
-        }
-    }
-
-    private func reloadPropsForNewGame() {
-        self.model?.removeWords()
-        self.answer = model?.getAnswer() ?? "дождь"
-        self.clearGuesses()
-        self.section = 0
-        self.isWordComplete = [0 : false]
-        self.lettersForKeyboard = [Character : MatchType?]()
-        self.view?.setKeyboardKeys(with: self.lettersForKeyboard)
-        self.view?.reloadKeyboard()
-        self.view?.reloadGameboard()
-        self.view?.getChars(self.guesses)
-    }
-
-    private func clearGuesses() {
-        self.guesses = Array(
-            repeating: Array(repeating: nil, count: 5),
-            count: 6
-        )
+        self.checkGameOver()
     }
 }
 
    // MARK: - Protocol Method's for Gameboard
+  /// Set gameboard and keyboard state -- wrong letter, wrong place and full match
 extension GamePresenter {
     func setKeys(at indexPath: IndexPath) -> MatchType? {
         let rowIndex = indexPath.section
@@ -176,6 +158,43 @@ extension GamePresenter: GamePresenterForRouterProtocol {
     func goBack() {
         guard let view = view else { return }
         self.router?.dismiss(from: view)
+    }
+}
+   // MARK: - Support methods
+  /// Reload properites for new game, clean guess word and check answer
+extension GamePresenter {
+    private func reloadPropsForNewGame() {
+        self.model?.removeWords()
+        self.answer = model?.getAnswer() ?? "дождь"
+        self.clearGuesses()
+        self.section = 0
+        self.isWordComplete = [0 : false]
+        self.lettersForKeyboard = [Character : MatchType?]()
+        self.view?.setKeyboardKeys(with: self.lettersForKeyboard)
+        self.view?.reloadKeyboard()
+        self.view?.reloadGameboard()
+        self.view?.getChars(self.guesses)
+    }
+
+    private func clearGuesses() {
+        self.guesses = Array(
+            repeating: Array(repeating: nil, count: 5),
+            count: 6
+        )
+    }
+
+    private func checkWord() {
+        if model?.checkGuessWord(guesses[section]) ?? false {
+            guard let view = view else { return }
+            router?.showCongratsAlert(from: view)
+        }
+    }
+
+    private func checkGameOver() {
+        if isWordComplete.count == 7 {
+            guard let view = view else { return }
+            self.router?.showGameOverAlert(from: view, answer: self.answer)
+        }
     }
 }
 
