@@ -16,7 +16,13 @@ final class MainPresenter: MainPresenterProtocol {
         router?.goNewGame(from: view)
     }
 
-
-
-
+    func checkNewGame() -> Bool {
+        let storageManager = StorageManager()
+        let word: String? = storageManager.getWord(key: WordsKeys.firstWord)
+        if word == nil {
+            return false
+        } else {
+            return true
+        }
+    }
 }

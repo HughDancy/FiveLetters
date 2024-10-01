@@ -9,27 +9,38 @@ import Foundation
 
 final class StorageManager {
     let storage = UserDefaults.standard
-    
-    func saveWord(key: StorageKeys, word: String) {
+
+    func saveAnswer(_ string: String) {
+        storage.setValue(string, forKey: "answer")
+    }
+
+    func getAnswer() -> String? {
+        storage.string(forKey: "answer")
+    }
+
+    func saveWord(key: WordsKeys, word: String) {
         storage.setValue(word, forKey: key.rawValue)
     }
     
-    func getWord(key: StorageKeys) -> String {
-        return storage.string(forKey: key.rawValue) ?? "дождь"
+    func getWord(key: WordsKeys) -> String? {
+        return storage.string(forKey: key.rawValue)
     }
     
     func removeAllWords() {
-        let allKeys = StorageKeys.allCases
+        let allKeys = WordsKeys.allCases
         for key in allKeys {
             storage.removeObject(forKey: key.rawValue)
         }
+        storage.removeObject(forKey: "answer")
     }
 }
 
-enum StorageKeys: String, CaseIterable {
+enum WordsKeys: String, CaseIterable {
     case firstWord
     case secondWord
     case thirdWord
     case fourWord
     case fiveWord
+    case sixWord
 }
+

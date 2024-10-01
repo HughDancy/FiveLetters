@@ -8,6 +8,7 @@
 import UIKit
 
 final class AssemblyBuilder {
+
     static func createMainModule() -> UIViewController {
         let view = MainController()
         let presenter: MainPresenterProtocol = MainPresenter()
@@ -22,10 +23,12 @@ final class AssemblyBuilder {
     static func createGameModule() -> UIViewController {
         let view = GameViewController()
         let presenter: GamePresenterProtocol & GamePresenterForRouterProtocol = GamePresenter()
+        let gameModel: GameModelProtocol = GameModel()
         let router: GameRouterProtocol = GameRouter()
         view.presenter = presenter
         presenter.view = view
         presenter.router = router
+        presenter.model = gameModel
         router.presenter = presenter
         return view
     }

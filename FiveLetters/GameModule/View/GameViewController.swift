@@ -32,6 +32,8 @@ class GameViewController: UIViewController {
         setupNavigationBar()
         view.backgroundColor = .label
         addChildren()
+        let storage = StorageManager()
+        storage.removeAllWords()
     }
 
     deinit {

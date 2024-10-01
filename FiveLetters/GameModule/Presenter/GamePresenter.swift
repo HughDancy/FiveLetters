@@ -11,6 +11,7 @@ final class GamePresenter: GamePresenterProtocol {
     // MARK: - Protocol properties
     weak var view: GameViewProtocol?
     var router: GameRouterProtocol?
+    var model: GameModelProtocol?
 
     // MARK: - Private properties
     private var guesses: [[Character?]] = Array(
@@ -21,8 +22,10 @@ final class GamePresenter: GamePresenterProtocol {
     private var section = 0
     private var isWordComplete = [0 : false]
     private var lettersForKeyboard = [Character : MatchType?]()
-    private var wordsStorage = WordsCollection()
-    private var wordManager = WordManager()
+//    private let wordsStorage = WordsCollection()
+//    private let wordManager = WordManager()
+//    private let storageManager = StorageManager()
+//    private let keys = WordsKeys.allCases
 
 
     // MARK: - Protocol method's
@@ -31,7 +34,8 @@ final class GamePresenter: GamePresenterProtocol {
     }
     
     func getAnswer() -> String {
-        self.answer = wordsStorage.getRandomWord()
+        self.answer = model?.getAnswer() ?? "дождь"
+//        wordsStorage.getRandomWord()
         return self.answer
     }
     
@@ -82,6 +86,8 @@ extension GamePresenter {
 
     func tapDoneKey() {
         isWordComplete.updateValue(true, forKey: section)
+//        let string = wordManager.convertToWord(guesses[section])
+//        storageManager.saveWord(key: keys[section], word: string)
         self.view?.reloadGameboard()
         self.section += 1
         isWordComplete[section] = false
@@ -92,7 +98,8 @@ extension GamePresenter {
     }
 
     private func reloadPropsForNewGame() {
-        self.answer = wordsStorage.collection?.words.randomElement() ?? "дождь"
+//        self.answer = wordsStorage.collection?.words.randomElement() ?? "дождь"
+        self.answer = model?.getAnswer() ?? "дождь"
         self.clearGuesses()
         self.section = 0
         self.isWordComplete = [0 : false]

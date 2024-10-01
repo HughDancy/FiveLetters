@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol GameModelProtocol: AnyObject {
+    func getAnswer() -> String
+    func getCharacters() -> [[Character?]]
+    func saveWord(_ chars: [Character?], index: Int)
+    func saveAnswer(_ word: String)
+    func removeWords()
+}
+
 protocol GameViewProtocol: AnyObject {
     var presenter: GamePresenterProtocol? { get set }
     func getChars(_ chars: [[Character?]])
@@ -14,12 +22,11 @@ protocol GameViewProtocol: AnyObject {
     func setKeyboardKeys(with keys: [Character : MatchType?])
     func reloadKeyboard()
     func reloadGameboard()
-
 }
-
 
 protocol GamePresenterProtocol: AnyObject {
     var view: GameViewProtocol? { get set }
+    var model: GameModelProtocol? { get set }
     var router: GameRouterProtocol? { get set }
 
     func fetchChars()

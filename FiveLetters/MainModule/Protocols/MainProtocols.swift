@@ -16,6 +16,7 @@ protocol MainPresenterProtocol: AnyObject {
     var view: MainViewProtocol? { get set }
     var router: MainRouterProtocol? { get set }
     func goToNewGame(from view: MainViewProtocol)
+    func checkNewGame() -> Bool
 }
 
 protocol MainRouterProtocol: AnyObject {

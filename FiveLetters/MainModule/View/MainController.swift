@@ -9,7 +9,7 @@ import UIKit
 
 class MainController: UIViewController, MainViewProtocol {
     // MARK: - Properties
-    private var isGameExisting = false
+    private var isGameExisting: Bool?
     var presenter: MainPresenterProtocol?
 
     // MARK: - Outlets
@@ -21,7 +21,9 @@ class MainController: UIViewController, MainViewProtocol {
 
     private lazy var continueGameButton: BaseButton = {
         let button = BaseButton(title: "Продолжить игру")
-        button.isHidden = !isGameExisting
+        if let boolean = isGameExisting {
+            button.isHidden = !boolean
+        }
         button.addTarget(self, action: #selector(goToGame), for: .touchDown)
         return button
     }()
@@ -30,6 +32,7 @@ class MainController: UIViewController, MainViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .label
+        self.isGameExisting  = presenter?.checkNewGame()
         setupHierarchy()
         setupLayout()
     }
