@@ -94,5 +94,12 @@ final class GameModel: GameModelProtocol {
         return isWordComplete
     }
 
+    func checkGuessWord(_ char: [Character?]) -> Bool {
+        let chars = char.compactMap { $0 }
+        let str = wordManager.convertToWord(chars)
+        let answer = storageManager.getAnswer()
+        return str == answer ? true : false
+    }
+
     
 }

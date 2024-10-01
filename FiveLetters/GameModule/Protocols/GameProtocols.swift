@@ -14,13 +14,14 @@ protocol GameModelProtocol: AnyObject {
     func getWordsComplete() -> [Int : Bool]
     func saveWord(_ chars: [Character?], index: Int)
     func saveAnswer(_ word: String)
+    func checkGuessWord(_ char: [Character?]) -> Bool
     func removeWords()
 }
 
 protocol GameViewProtocol: AnyObject {
     var presenter: GamePresenterProtocol? { get set }
+    
     func getChars(_ chars: [[Character?]])
-    func getAnswer(_ answer: String)
     func setKeyboardKeys(with keys: [Character : MatchType?])
     func reloadKeyboard()
     func reloadGameboard()
@@ -34,7 +35,6 @@ protocol GamePresenterProtocol: AnyObject {
 
     func setupGame()
     func fetchChars()
-    func getAnswer() -> String
     func getBack()
     func setKeys(at indexPath: IndexPath) -> MatchType? 
     func tapKeys(with char: Character)
@@ -49,7 +49,21 @@ protocol GamePresenterForRouterProtocol: AnyObject {
 
 protocol GameRouterProtocol: AnyObject {
     var presenter: GamePresenterForRouterProtocol? { get set }
+
     func dismiss(from view: GameViewProtocol)
     func showGameOverAlert(from view: GameViewProtocol, answer: String)
-
+    func showCongratsAlert(from view: GameViewProtocol)
 }
+
+
+protocol GameBoardDelegate: AnyObject {
+    var currentGuesses: [[Character?]] { get }
+    func setLetter(at indexPath: IndexPath) -> MatchType?
+}
+
+protocol KeyboardDelegate: AnyObject {
+    func keyboard(_ vc: UIViewController, didTapKey letter: Character)
+    func didTapDoneKey()
+    func didTapClearKey(_ vc: UIViewController)
+}
+

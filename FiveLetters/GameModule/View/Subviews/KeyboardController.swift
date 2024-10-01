@@ -7,19 +7,11 @@
 
 import UIKit
 
-protocol KeyboardDelegate: AnyObject {
-    func keyboard(_ vc: UIViewController, didTapKey letter: Character)
-    func didTapDoneKey()
-    func didTapClearKey(_ vc: UIViewController)
-}
-
-class KeyboardController: UIViewController {
+final class KeyboardController: UIViewController {
     weak var delegate: KeyboardDelegate?
     private let letters = ["йцукенгшщзхъ", "фывапролджэ","vячсмитьбю*"]
     private var keys = [[Character]]()
     private var guesesWord = [Character]()
-    private var isDoneActive = false
-    private var isClearActive = false
     private var matchedKeys = [Character : MatchType?]()
 
     // MARK: - Outlets
@@ -30,12 +22,14 @@ class KeyboardController: UIViewController {
         return collectionView
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
         setupView()
     }
 
+    // MARK: - Setup View methods
     private func setupView() {
         view.addSubview(keyboardCollection)
         setupLayout()
@@ -55,21 +49,21 @@ class KeyboardController: UIViewController {
             keyboardCollection.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             keyboardCollection.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             keyboardCollection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-
         ])
     }
 
-    public func reloadData() {
+    // MARK: - Support method for update keyboard state
+    func reloadData() {
         self.keyboardCollection.reloadData()
     }
 
-    public func setupMatch(_ mathced: [Character : MatchType?]) {
+    func setupMatch(_ mathced: [Character : MatchType?]) {
         self.matchedKeys = mathced
         self.keyboardCollection.reloadData()
     }
 }
 
-
+// MARK: - UICollection Data Source extension
 extension KeyboardController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         keys.count
@@ -84,6 +78,7 @@ extension KeyboardController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let letter = keys[indexPath.section][indexPath.row]
+
         switch letter {
         case "v":
             cell.type = .keyboardType(.done)
@@ -106,16 +101,15 @@ extension KeyboardController: UICollectionViewDataSource {
         cell.setupKeyboardCell(with: letter)
 
         let keys = matchedKeys.keys
-            for key in keys {
-                if key == letter {
-                    cell.setupMatchType(with: (matchedKeys[key] ?? .standart) ?? .standart)
-                }
-
+        for key in keys {
+            if key == letter {
+                cell.setupMatchType(with: (matchedKeys[key] ?? .standart) ?? .standart)
+            }
         }
         return cell
     }
 }
-
+    // MARK: - UICollectionView Delegate Extension
 extension KeyboardController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let letter = keys[indexPath.section][indexPath.row]

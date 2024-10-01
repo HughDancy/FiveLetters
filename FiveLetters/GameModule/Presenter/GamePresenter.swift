@@ -12,11 +12,7 @@ final class GamePresenter: GamePresenterProtocol {
     weak var view: GameViewProtocol?
     var router: GameRouterProtocol?
     var model: GameModelProtocol?
-    var isGameExist: Bool? {
-        didSet {
-            self.setupGame()
-        }
-    }
+    var isGameExist: Bool?
 
     // MARK: - Private properties
     private var guesses: [[Character?]] = Array(
@@ -51,11 +47,6 @@ final class GamePresenter: GamePresenterProtocol {
     // MARK: - Protocol method's
     func fetchChars() {
         view?.getChars(self.guesses)
-    }
-    
-    func getAnswer() -> String {
-        self.answer = model?.getAnswer() ?? "дождь"
-        return self.answer
     }
     
     func getBack() {
@@ -107,9 +98,12 @@ extension GamePresenter {
         isWordComplete.updateValue(true, forKey: section)
         model?.saveWord(guesses[section], index: section)
         model?.saveAnswer(self.answer)
-//        let string = wordManager.convertToWord(guesses[section])
-//        storageManager.saveWord(key: keys[section], word: string)
+        print(self.answer)
         self.view?.reloadGameboard()
+        if model?.checkGuessWord(guesses[section]) ?? false {
+            guard let view = view else { return }
+            router?.showCongratsAlert(from: view)
+        }
         self.section += 1
         isWordComplete[section] = false
         if isWordComplete.count == 7 {
@@ -119,7 +113,6 @@ extension GamePresenter {
     }
 
     private func reloadPropsForNewGame() {
-//        self.answer = wordsStorage.collection?.words.randomElement() ?? "дождь"
         self.model?.removeWords()
         self.answer = model?.getAnswer() ?? "дождь"
         self.clearGuesses()
@@ -130,7 +123,6 @@ extension GamePresenter {
         self.view?.reloadKeyboard()
         self.view?.reloadGameboard()
         self.view?.getChars(self.guesses)
-        self.view?.getAnswer(self.answer)
     }
 
     private func clearGuesses() {

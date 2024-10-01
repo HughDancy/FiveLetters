@@ -14,18 +14,12 @@ class GameViewController: UIViewController {
         repeating: Array(repeating: nil, count: 5),
         count: 6
     )
-    private var answer = ""
 
     // MARK: - Outlets
     let gamefieldController = GameboardController()
     let keyboardController = KeyboardController()
 
     // MARK: - Lifecycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.answer = self.presenter?.getAnswer() ?? "дождь"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -85,16 +79,12 @@ class GameViewController: UIViewController {
         self.presenter?.getBack()
     }
 }
-
+   // MARK: - GameView Protocol Extension
 extension GameViewController: GameViewProtocol {
     func setKeyboardKeys(with keys: [Character : MatchType?]) {
         self.keyboardController.setupMatch(keys)
     }
-    
-    func getAnswer(_ answer: String) {
-        self.answer = answer
-    }
-    
+
     func reloadKeyboard() {
         self.keyboardController.reloadData()
     }
@@ -107,7 +97,7 @@ extension GameViewController: GameViewProtocol {
         self.guesses = chars
     }
 }
-
+    // MARK: - Keyboard Delegate extension
 extension GameViewController: KeyboardDelegate {
     func keyboard(_ vc: UIViewController, didTapKey letter: Character) {
         self.presenter?.tapKeys(with: letter)
@@ -122,7 +112,7 @@ extension GameViewController: KeyboardDelegate {
         }
     }
 
-
+    // MARK: - GameBoard Delegate Extension
 extension GameViewController: GameBoardDelegate {
     var currentGuesses: [[Character?]] {
         return guesses

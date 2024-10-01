@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol GameBoardDelegate: AnyObject {
-    var currentGuesses: [[Character?]] { get }
-    func setLetter(at indexPath: IndexPath) -> MatchType?
-}
-
-class GameboardController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+final class GameboardController: UIViewController{
     weak var gameBoardDelegate: GameBoardDelegate?
 
     private lazy var collectionView: GameCollectionView = {
@@ -38,11 +33,10 @@ class GameboardController: UIViewController, UICollectionViewDelegateFlowLayout,
 
     public func reloadData() {
         collectionView.reloadData()
-
     }
 }
 
-extension GameboardController {
+extension GameboardController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource  {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return gameBoardDelegate?.currentGuesses.count ?? 0
     }

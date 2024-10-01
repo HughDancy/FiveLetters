@@ -36,4 +36,18 @@ final class GameRouter: GameRouterProtocol {
         alertController.addAction(cancelAction)
         currentView.present(alertController, animated: true)
     }
+
+    func showCongratsAlert(from view: any GameViewProtocol) {
+        guard let currentView = view as? UIViewController else { return }
+        let alertController = UIAlertController(title: "🥳 ПОБЕДА 🥳",
+                                                message: "",
+                                                preferredStyle: .alert)
+        alertController.view.alpha = 0.5
+        currentView.present(alertController, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+            self.presenter?.restart()
+            alertController.dismiss(animated: true)
+        })
+
+    }
 }
