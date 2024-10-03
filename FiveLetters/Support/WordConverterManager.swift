@@ -19,10 +19,6 @@ final class WordConverterManager {
     }
 
     func convertToChars(_ string: String) -> [Character] {
-        var chars = [Character]()
-        for char in string {
-            chars.append(char)
-        }
-        return chars
+        return Array(string)
     }
 }
