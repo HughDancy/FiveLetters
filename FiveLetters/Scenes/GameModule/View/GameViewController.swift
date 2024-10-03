@@ -10,10 +10,7 @@ import UIKit
 final class GameViewController: UIViewController {
     // MARK: - Properties
     var presenter: GamePresenterProtocol?
-    private var guesses: [[Character?]] = Array(
-        repeating: Array(repeating: nil, count: 5),
-        count: 6
-    )
+    private var guesses = [[Character?]]()
 
     // MARK: - Outlets
     let gamefieldController = GameboardController()

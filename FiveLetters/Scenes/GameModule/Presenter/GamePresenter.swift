@@ -15,10 +15,7 @@ final class GamePresenter: GamePresenterProtocol {
     var isGameExist: Bool?
 
     // MARK: - Private properties
-    private var guesses: [[Character?]] = Array(
-        repeating: Array(repeating: nil, count: 5),
-        count: 6
-    )
+    private var guesses = [[Character?]]()
     private var answer = "дождь"
     private var section = 0
     private var isWordComplete = [0 : false]
@@ -29,17 +26,16 @@ final class GamePresenter: GamePresenterProtocol {
         guard let bool = isGameExist else { return }
 
         if bool {
-            self.answer = model?.getAnswer() ?? "дождь"
-            let chars: [[Character?]] = Array(
-                repeating: Array(repeating: nil, count: 5),
-                count: 6
-            )
-            self.guesses = model?.getSavedCharacters() ?? chars
+            self.answer = model?.getSavedAnswer() ?? "дождь"
+            guard let chars = model?.getSavedCharacters() else { return }
+            self.guesses = chars
             let sec = model?.getSection()
             self.section = sec ?? 0
-            self.isWordComplete = model?.getWordsComplete() ?? [0 : false]
+            self.isWordComplete = model?.getIsWordComplete() ?? [0 : false]
         } else {
-            self.answer = model?.getAnswer() ?? "Дождь"
+            guard let emptyChars = self.model?.getEmptyCharacters() else { return }
+            self.guesses = emptyChars
+            self.answer = model?.getRandowAnswer() ?? "дождь"
         }
     }
 
@@ -102,7 +98,9 @@ extension GamePresenter {
     func tapDoneKey() {
         isWordComplete.updateValue(true, forKey: section)
         model?.saveWord(guesses[section], index: section)
-        model?.saveAnswer(self.answer)
+        if section == 0 {
+            model?.saveAnswer(self.answer)
+        }
         self.view?.reloadGameboard()
         self.checkWord()
         self.section += 1
@@ -157,28 +155,27 @@ extension GamePresenter: GamePresenterForRouterProtocol {
         self.router?.dismiss(from: view)
     }
 }
+
    // MARK: - Support methods
   /// Reload properites for new game, clean guess word and check answer
 extension GamePresenter {
     private func reloadPropsForNewGame() {
         self.sendNotification(with: false)
         self.model?.removeWords()
-        self.answer = model?.getAnswer() ?? "дождь"
+        self.answer = model?.getRandowAnswer() ?? "дождь"
         self.clearGuesses()
+        self.view?.getChars(self.guesses)
         self.section = 0
         self.isWordComplete = [0 : false]
         self.lettersForKeyboard = [Character : MatchType?]()
         self.view?.setKeyboardKeys(with: self.lettersForKeyboard)
         self.view?.reloadKeyboard()
         self.view?.reloadGameboard()
-        self.view?.getChars(self.guesses)
     }
 
     private func clearGuesses() {
-        self.guesses = Array(
-            repeating: Array(repeating: nil, count: 5),
-            count: 6
-        )
+        guard let emptyChars = self.model?.getEmptyCharacters() else {  return }
+        self.guesses = emptyChars
     }
 
     private func checkWord() {

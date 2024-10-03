@@ -9,26 +9,32 @@ import Foundation
 
 final class GameModel: GameModelProtocol {
     // MARK: - Properties
-    private let wordsStorage = WordsCollection()
-    private let wordManager = WordConverterManager()
+    private let wordsCollection = WordsCollection()
+    private let wordConverterManager = WordConverterManager()
     private let storageManager = StorageManager.shared
     private let keys = WordsKeys.allCases
 
     // MARK: - Protocol Method's
-    func getAnswer() -> String {
-        let safeAnser = storageManager.getAnswer()
-        if safeAnser == nil {
-            return self.wordsStorage.getRandomWord()
-        } else {
-            return safeAnser ?? "Дождь"
-        }
+    func getSavedAnswer() -> String {
+        let safedAnser = storageManager.getAnswer()
+        return safedAnser ?? "Дождь"
     }
-    
+
+    func getRandowAnswer() -> String {
+        return wordsCollection.getRandomWord()
+    }
+
+    func getEmptyCharacters() -> [[Character?]] {
+        return  Array(
+            repeating: Array(repeating: nil, count: 5),
+            count: 6)
+    }
+
     func getSavedCharacters() -> [[Character?]] {
         var chars = [[Character?]]()
         let words = self.getAllWords()
         for (index, _) in words.enumerated() {
-            var char: [Character?] = wordManager.convertToChars(words[index] ?? "")
+            var char: [Character?] = wordConverterManager.convertToChars(words[index] ?? "")
             if char.isEmpty {
                 for _ in 0..<5 {
                     char.append(nil)
@@ -37,21 +43,6 @@ final class GameModel: GameModelProtocol {
             chars.append(char)
         }
         return chars
-    }
-
-    func saveWord(_ chars: [Character?], index: Int) {
-        let string = wordManager.convertToWord(chars)
-        if index < 6 {
-            self.storageManager.saveWord(key: keys[index], word: string)
-        }
-    }
-
-    func saveAnswer(_ word: String) {
-        storageManager.saveAnswer(word)
-    }
-
-    func removeWords() {
-        self.storageManager.removeAllWords()
     }
 
     func getSection() -> Int {
@@ -65,7 +56,7 @@ final class GameModel: GameModelProtocol {
         return count
     }
 
-    func getWordsComplete() -> [Int : Bool] {
+    func getIsWordComplete() -> [Int : Bool] {
         let words = self.getAllWords()
         var isWordComplete = [Int : Bool]()
         for i in 0..<5 {
@@ -78,9 +69,24 @@ final class GameModel: GameModelProtocol {
         return isWordComplete
     }
 
+    func saveWord(_ chars: [Character?], index: Int) {
+        let string = wordConverterManager.convertToWord(chars)
+        if index < 6 {
+            self.storageManager.saveWord(key: keys[index], word: string)
+        }
+    }
+
+    func saveAnswer(_ word: String) {
+        storageManager.saveAnswer(word)
+    }
+
+    func removeWords() {
+        self.storageManager.removeAllWords()
+    }
+
     func checkGuessWord(_ char: [Character?]) -> Bool {
         let chars = char.compactMap { $0 }
-        let str = wordManager.convertToWord(chars)
+        let str = wordConverterManager.convertToWord(chars)
         let answer = storageManager.getAnswer()
         return str == answer ? true : false
     }

@@ -8,10 +8,12 @@
 import UIKit
 
 protocol GameModelProtocol: AnyObject {
-    func getAnswer() -> String
+    func getSavedAnswer() -> String
+    func getRandowAnswer() -> String
+    func getEmptyCharacters() -> [[Character?]]
     func getSavedCharacters() -> [[Character?]]
     func getSection() -> Int
-    func getWordsComplete() -> [Int : Bool]
+    func getIsWordComplete() -> [Int : Bool]
     func saveWord(_ chars: [Character?], index: Int)
     func saveAnswer(_ word: String)
     func checkGuessWord(_ char: [Character?]) -> Bool
@@ -35,11 +37,11 @@ protocol GamePresenterProtocol: AnyObject {
 
     func setupGame()
     func fetchChars()
-    func getBack()
-    func setKeys(at indexPath: IndexPath) -> MatchType? 
+    func setKeys(at indexPath: IndexPath) -> MatchType?
     func tapKeys(with char: Character)
     func deleteChar()
     func tapDoneKey()
+    func getBack()
 }
 
 protocol GamePresenterForRouterProtocol: AnyObject {
